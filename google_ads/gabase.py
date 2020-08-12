@@ -230,8 +230,11 @@ class CSVReport:
                 break
             impressions_summ += int(i.split(",")[impressions_index])
             line = dict(zip(fields, i.split(",")))  # получили dict с именами полей
-            #  приведение типов для извесных полей
-            for field in ['Search top IS', 'Search abs. top IS', 'Search Impr. share']:
+            # приведение типов для извесных полей
+            # https://support.google.com/google-ads/answer/7501826?hl=en
+            # https://support.google.com/google-ads/answer/2497703?hl=en
+            for field in ['Search top IS', 'Search abs. top IS', 'Search Impr. share',
+                          'Impr. (Top) %', 'Impr. (Abs. Top) %']:
                 if line.get(field, False):
                     if line[field].find("--") != -1:
                         line[field] = None
@@ -239,8 +242,9 @@ class CSVReport:
                         line[field] = 1.0
                     else:
                         line[field] = float(line[field].replace("%", ""))
-            if line.get('Search top IS', False):
-                line['Search top IS'] *= 100
+            for field in ['Search top IS', 'Impr. (Top) %', 'Impr. (Abs. Top) %']:
+                if line.get(field, False):
+                    line[field] *= 100
 
             for field in ['Impressions', 'Clicks', 'Cost']:
                 if line.get(field, False):
