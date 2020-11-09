@@ -415,18 +415,18 @@ class GAReportByDate(CSVReport):
 class GoogleAdsBase:
     def __init__(self, directory="./", dump_file_prefix="fooooo", cache=True, account="base"):
         self.google_ads_account = account
-        cred_filename = "googleads.yaml"
+        cred_filename = "googleads_brand.yaml"
         self.feed_item_id = 9669007
-        if account == "gdn":
-            cred_filename = "googleads_gdn.yaml"
+        if account == "novostroyki-acc":
+            cred_filename = "googleads_nov.yaml"
             self.feed_item_id = 170260598
-        elif account == "novct":
-            cred_filename = "googleads_novct.yaml"
+        elif account == "vtorichka-acc":
+            cred_filename = "googleads_vtorichka.yaml"
             self.feed_item_id = None
-        elif account == "btob":
-            cred_filename = "googleads_b2b.yaml"
+        elif account == "own-acc":
+            cred_filename = "googleads_own.yaml"
             self.feed_item_id = 91276129
-        elif account == "ipoteka":
+        elif account == "ipoteka-acc":
             cred_filename = "googleads_ipoteka.yaml"
             self.feed_item_id = 124523402
 
