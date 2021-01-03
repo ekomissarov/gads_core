@@ -422,13 +422,17 @@ class GoogleAdsBase:
             self.feed_item_id = 170260598
         elif account == "vtorichka-acc":
             cred_filename = "googleads_vtorichka.yaml"
-            self.feed_item_id = None
+            self.feed_item_id = 245949413
         elif account == "own-acc":
             cred_filename = "googleads_own.yaml"
             self.feed_item_id = 91276129
         elif account == "ipoteka-acc":
             cred_filename = "googleads_ipoteka.yaml"
             self.feed_item_id = 124523402
+        elif account == "commerce-acc":
+            cred_filename = "googleads_com.yaml"
+            self.feed_item_id = 241543429
+
 
         self.adwords_client = adwords.AdWordsClient.LoadFromStorage(
             f"{ENVI['CREDENTIALS_DIR']}{cred_filename}"
