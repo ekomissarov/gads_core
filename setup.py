@@ -6,13 +6,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pysea-google-ads", # Replace with your own username
-    version="0.0.7",
+    version="0.0.8",
     author="Eugene Komissarov",
     author_email="ekom@cian.ru",
     description="Google Ads base",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://ekomissarov@bitbucket.org/ekomissarov/google_ads.git",
+    url="git@bitbucket.org:cianmedia/gads_core.git",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
