@@ -18,7 +18,7 @@ from googleapiclient.errors import HttpError
 from socket import timeout
 
 ENVI = constants.EnviVar(
-    main_dir="/home/eugene/Yandex.Disk/localsource/google_ads/",
+    main_dir="/home/eugene/Yandex.Disk/localsource/gads_core/",
     cred_dir="/home/eugene/Yandex.Disk/localsource/credentials/"
 )
 logger = constants.logging.getLogger(__name__)

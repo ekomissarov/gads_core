@@ -2,7 +2,7 @@ from common_constants import constants
 from google_ads import gabase
 import re
 ENVI = constants.EnviVar(
-    main_dir="/home/eugene/Yandex.Disk/localsource/google_ads/",
+    main_dir="/home/eugene/Yandex.Disk/localsource/gads_core/",
     cred_dir="/home/eugene/Yandex.Disk/localsource/credentials/"
 )
 logger = constants.logging.getLogger(__name__)
