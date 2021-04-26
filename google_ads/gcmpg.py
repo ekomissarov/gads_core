@@ -138,7 +138,7 @@ class GGroups(gabase.GoogleAdsBase):
 
         # Construct selector and get all campaigns.
         selector = {
-            'fields': ['Id', 'Name', "CampaignId"],
+            'fields': ['Id', 'Name', "CampaignId", "Status"],
             'predicates': [{
                 'field': 'CampaignId',
                 'operator': 'IN',
