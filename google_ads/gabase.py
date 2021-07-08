@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+import googleads.errors
 from googleads import adwords
 from common_constants import constants
 import re
@@ -150,7 +152,8 @@ def connection_attempts(n=12, t=10):  # конструктор декорато�
                     # Обработка ошибки, если не удалось соединиться с сервером
                 except (ConnectionError,
                         ProtocolError, RemoteDisconnected,
-                        HttpError, timeout) as err:
+                        HttpError, timeout,
+                        googleads.errors.GoogleAdsServerFault) as err:
                     logger.error(f"Ошибка соединения с сервером {err}. Осталось попыток {retry_flag - try_number}")
                     if try_number >= retry_flag:
                         raise LimitOfRetryError
