@@ -9,7 +9,7 @@ colorlog==4.8.0
 defusedxml==0.6.0
 distlib==0.3.2
 filelock==3.0.12
-google-ads==12.0.0
+google-ads==13.0.0
 google-api-core==1.21.0
 google-api-python-client==1.9.3
 google-auth==1.19.0

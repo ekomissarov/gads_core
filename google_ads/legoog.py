@@ -27,9 +27,15 @@ def main(client, customer_id):
     query = """
         SELECT
           campaign.id,
-          campaign.name
+          campaign.name,
+          campaign.status,
+          campaign.campaign_budget,
+          campaign.serving_status,
+          campaign.experiment_type
         FROM campaign
         ORDER BY campaign.id"""
+
+    #['Id', 'Name', 'Status', 'BudgetId', 'ServingStatus', 'CampaignTrialType'],
 
     # Issues a search request using streaming.
     response = ga_service.search_stream(
@@ -39,16 +45,21 @@ def main(client, customer_id):
 
     for batch in response:
         for row in batch.results:
-            print(
-                f"Campaign with ID {row.campaign.id} and name "
-                f'"{row.campaign.name}" was found.'
-            )
+            if row.campaign.name == "b2c_nn_brand_cian_all_mix_search":
+                print(
+                    f"ID {row.campaign.id} / "
+                    f'"{row.campaign.status.name}" / '
+                    f'"{row.campaign.experiment_type.name}" / '
+                    f'"{row.campaign.serving_status.name}" / '
+                    f'"{row.campaign.campaign_budget}" / '
+                    f'"{row.campaign.name}" / '
+                )
 
 
 if __name__ == "__main__":
     # GoogleAdsClient will read the google-ads.yaml configuration file in the
     # home directory if none is specified.
-    googleads_client = GoogleAdsClient.load_from_storage(path=f"{ENVI['CREDENTIALS_DIR']}google_test.yaml", version="v8")
+    googleads_client = GoogleAdsClient.load_from_storage(path=f"{ENVI['CREDENTIALS_DIR']}legoog_mcc.yaml", version="v8")
 
 
     try:

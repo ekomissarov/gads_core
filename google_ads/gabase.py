@@ -3,6 +3,8 @@ from __future__ import annotations
 import googleads.errors
 from googleads import adwords
 from common_constants import constants
+from google.ads.googleads.client import GoogleAdsClient
+from google.ads.googleads.errors import GoogleAdsException
 import re
 import pickle
 from datetime import date
@@ -455,3 +457,53 @@ class GoogleAdsBase:
 
     def cache_disabled(self):
         self.cache = False
+
+
+class LeGoogBase:
+    def __init__(self, directory="./", dump_file_prefix="fooooo", cache=True, account="cian-brand-acc", version="v8"):
+        self.accounts = {
+            "cian-brand-acc": {"customer_id": "4080705273", "feed_item_id": 9669007},
+            "cian-nov-acc": {"customer_id": "6197602490", "feed_item_id": 170260598},
+            "cian-vtorichka-acc": {"customer_id": "8844904684", "feed_item_id": 245949413},
+            "cian-own-acc": {"customer_id": "9703448546", "feed_item_id": 91276129},
+            "cian-ipoteka-acc": {"customer_id": "4393746846", "feed_item_id": 124523402},
+            "cian-com-acc": {"customer_id": "4615488015", "feed_item_id": 241543429},
+        }
+        self.customer_id = self.accounts["cian-brand-acc"]["customer_id"]
+        self.feed_item_id = self.accounts["cian-brand-acc"]["feed_item_id"]
+        self.selected_google_ads_account = account
+        self._dump_file_prefix = dump_file_prefix
+        self.dump_file_prefix = f"{self._dump_file_prefix}_{self.selected_google_ads_account}"
+        self.select_account(account_name = account)
+
+        self.googleads_client = GoogleAdsClient.load_from_storage(
+            path=f"{ENVI['CREDENTIALS_DIR']}legoog_mcc.yaml",
+            version=version
+        )
+
+        # переменные настраивающие кеширование запросов к API
+        self.directory = directory
+        self.cache = cache
+
+        # переменные устанавливают постраничные запросы к API
+        #self.PAGE_SIZE = 100
+        #self.offset = 0
+
+    def cache_enabled(self):
+        self.cache = True
+
+    def cache_disabled(self):
+        self.cache = False
+
+    def list_accounts(self):
+        return list(self.accounts.keys())
+
+    def select_account(self, account_name):
+        if account_name in self.accounts:
+            self.selected_google_ads_account = account_name
+            self.customer_id = self.accounts[account_name]["customer_id"]
+            self.feed_item_id = self.accounts[account_name]["feed_item_id"]
+            self.dump_file_prefix = f"{self._dump_file_prefix}_{self.selected_google_ads_account}"
+
+        else:
+            raise GoogleAdsError(f"customer-id not found for account {account_name}")

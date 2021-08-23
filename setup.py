@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pysea-google-ads", # Replace with your own username
-    version="0.1.2",
+    version="0.1.3",
     author="Eugene Komissarov",
     author_email="ekom@cian.ru",
     description="Google Ads base",
