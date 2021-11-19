@@ -507,3 +507,5 @@ class LeGoogBase:
 
         else:
             raise GoogleAdsError(f"customer-id not found for account {account_name}")
+
+        return self
