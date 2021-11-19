@@ -163,7 +163,7 @@ class GGroups(gabase.GoogleAdsBase):
 
 
 class LeGoogCampaigns(gabase.LeGoogBase):
-    def __init__(self, directory=None, dump_file_prefix="gcmpg", cache=False, account="cian-brand-acc", version="v8"):
+    def __init__(self, directory=None, dump_file_prefix="gcmpg", cache=False, account="cian-brand-acc", version="v9"):
         if directory is None:
             directory = f"{ENVI['MAIN_PYSEA_DIR']}alldata/cache"
         super(LeGoogCampaigns, self).__init__(directory=directory, dump_file_prefix=dump_file_prefix,
@@ -206,15 +206,16 @@ class LeGoogCampaigns(gabase.LeGoogBase):
             ORDER BY campaign.id"""
 
         # Issues a search request using streaming.
-        response = ga_service.search_stream(
+        stream = ga_service.search_stream(
             customer_id=self.customer_id,
             query=query
         )
 
         result = []
-        for batch in response:
+        for batch in stream:
             for row in batch.results:
-                line = MessageToDict(row._pb)
+                #line = MessageToDict(row._pb)
+                line = MessageToDict(row)
                 line['campaign']['id'] = int(line['campaign']['id'])
                 line['campaign']['budgetid'] = int(line['campaign']['campaignBudget'].split("/")[-1])
                 result.append(line)
@@ -318,15 +319,16 @@ class LeGoogGroups(gabase.LeGoogBase):
 
         # Issues a search request using streaming.
 
-        response = ga_service.search_stream(
+        stream = ga_service.search_stream(
             customer_id=self.customer_id,
             query=query
         )
 
         result = []
-        for batch in response:
+        for batch in stream:
             for row in batch.results:
-                line = MessageToDict(row._pb)
+                #line = MessageToDict(row._pb)
+                line = MessageToDict(row)
                 line['campaign']['id'] = int(line['campaign']['id'])
                 line['adGroup']['id'] = int(line['adGroup']['id'])
                 result.append(line)
