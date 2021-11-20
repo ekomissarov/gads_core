@@ -163,11 +163,11 @@ class GGroups(gabase.GoogleAdsBase):
 
 
 class LeGoogCampaigns(gabase.LeGoogBase):
-    def __init__(self, directory=None, dump_file_prefix="gcmpg", cache=False, account="cian-brand-acc", version="v9"):
+    def __init__(self, directory=None, dump_file_prefix="gcmpg", cache=False, account="cian-brand-acc"):
         if directory is None:
             directory = f"{ENVI['MAIN_PYSEA_DIR']}alldata/cache"
         super(LeGoogCampaigns, self).__init__(directory=directory, dump_file_prefix=dump_file_prefix,
-                                              cache=cache, account=account, version=version)
+                                              cache=cache, account=account)
 
         self.data = self.__get_campaigns()
         self.ids_enabled = {i['campaign']['id'] for i in self.data if i['campaign']['status'] == 'ENABLED'}
@@ -269,11 +269,11 @@ class LeGoogCampaigns(gabase.LeGoogBase):
 
 
 class LeGoogGroups(gabase.LeGoogBase):
-    def __init__(self, campaign_ids, directory=None, dump_file_prefix="ggroups", cache=False, account="cian-brand-acc", version="v8"):
+    def __init__(self, campaign_ids, directory=None, dump_file_prefix="ggroups", cache=False, account="cian-brand-acc"):
         if directory is None:
             directory = f"{ENVI['MAIN_PYSEA_DIR']}alldata/cache"
         super(LeGoogGroups, self).__init__(directory=directory, dump_file_prefix=dump_file_prefix,
-                                      cache=cache, account=account, version=version)
+                                      cache=cache, account=account)
 
         self.campaign_ids = campaign_ids
         self.data = self.__get_adgroups(campaign_ids)

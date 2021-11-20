@@ -460,7 +460,7 @@ class GoogleAdsBase:
 
 
 class LeGoogBase:
-    def __init__(self, directory="./", dump_file_prefix="fooooo", cache=True, account="cian-brand-acc", version="v8"):
+    def __init__(self, directory="./", dump_file_prefix="fooooo", cache=True, account="cian-brand-acc", version="v9"):
         self.accounts = {
             "cian-brand-acc": {"customer_id": "4080705273", "feed_item_id": 9669007},
             "cian-nov-acc": {"customer_id": "6197602490", "feed_item_id": 170260598},
