@@ -469,6 +469,7 @@ class LeGoogBase:
             "cian-ipoteka-acc": {"customer_id": "4393746846", "feed_item_id": 124523402},
             "cian-com-acc": {"customer_id": "4615488015", "feed_item_id": 241543429},
         }
+        self.__ptr_account_resource = re.compile("customers/([0-9]+)/")
         self.customer_id = self.accounts["cian-brand-acc"]["customer_id"]
         self.feed_item_id = self.accounts["cian-brand-acc"]["feed_item_id"]
         self.selected_google_ads_account = account
@@ -509,3 +510,14 @@ class LeGoogBase:
             raise GoogleAdsError(f"customer-id not found for account {account_name}")
 
         return self
+
+    def get_account_name(self, resource_name):
+        account_id = self.__ptr_account_resource.search(resource_name)
+        account_id = account_id.group(1) if account_id else resource_name
+
+        for name, info in self.accounts.items():
+            if info['customer_id'] == account_id:
+                return name
+        return False
+
+
