@@ -199,6 +199,7 @@ class LeGoogCampaigns(gabase.LeGoogBase):
                   campaign.id,
                   campaign.name,
                   campaign.status,
+                  campaign.tracking_url_template,
                   campaign.campaign_budget,
                   campaign.serving_status,
                   campaign.experiment_type
